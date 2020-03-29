@@ -9,15 +9,17 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 requires = [
+    'googlemaps',
     'pyramid',
-    'pyramid_jinja2',
     'pyramid_debugtoolbar',
+    'pyramid_jinja2',
     'pyramid_tm',
+    'requests',
     'SQLAlchemy',
     'transaction',
-    'zope.sqlalchemy',
     'waitress',
-    ]
+    'zope.sqlalchemy',
+]
 
 tests_require = [
     'WebTest >= 1.3.1',  # py3 compat

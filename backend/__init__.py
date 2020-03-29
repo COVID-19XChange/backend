@@ -13,6 +13,9 @@ def get_from_env_or_settings(settings_name, settings, env_name=None, default=Non
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
+
+    settings['googlemaps.api_key'] = get_from_env_or_settings('googlemaps.api_key', settings)
+
     config = Configurator(settings=settings)
     config.include('pyramid_jinja2')
     config.include('.models')
