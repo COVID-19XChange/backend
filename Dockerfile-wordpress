@@ -1,0 +1,5 @@
+FROM wordpress:5.3.2-php7.2-apache
+EXPOSE 80
+RUN echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]

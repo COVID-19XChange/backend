@@ -1,12 +1,23 @@
 install:
-        pip install -U pip setuptools
-        pip install -e .
-        initialize_backend_db development.ini
+	@pip install -U pip setuptools
+	@pip install -e .
+	@initialize_backend_db development.ini
+
 run:
-        pserve development.ini
-docker-build:
-        docker build -t oi .
-docker-run:
-        docker run -p 0.0.0.0:6543:6543/tcp hi
-docker-wp:
-        docker run -p 0.0.0.0:8081:80/tcp wordpress:5.3.2-php7.2-apache
+	@pserve development.ini
+
+thanos_click:
+	@docker stop `docker ps -qa`
+	@docker container prune -f
+	@docker rmi `docker images -q`
+
+thanos_click_pp: thanos_click
+	@docker volume prune -f
+	@docker network prune -f
+
+create_init_maria_sql:
+	# wordpress stuff
+	echo "CREATE DATABASE $(WORDPRESS_DB_NAME);\n" \
+	  "CREATE USER '$(WORDPRESS_DB_USER)'@'wordpress' IDENTIFIED BY '$(WORDPRESS_DB_PASSWORD)';\n" \
+	  "GRANT ALL PRIVILEGES ON $(WORDPRESS_DB_NAME).* TO '$(WORDPRESS_DB_USER)'@'%';" > \
+	  init_maria.sql
