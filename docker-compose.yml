@@ -62,6 +62,7 @@ services:
     image: nginx:1.17.9-alpine
     ports:
       - 443:443
+      - 6200:6100
     volumes:
       - ./data/nginx/:/etc/nginx/conf.d
       - letsencrypt-data:/etc/letsencrypt:ro
