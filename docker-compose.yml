@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-backend
-    ports:
-      - 6543:6543
     networks:
       portal:
         aliases:
@@ -32,8 +30,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-wordpress
-    ports:
-      - 80:80
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
@@ -55,8 +51,6 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - mariadb-data:/var/lib/mysql
-    ports:
-      - 3306:3306
     networks:
       portal:
         aliases:
