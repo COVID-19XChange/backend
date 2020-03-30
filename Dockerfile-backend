@@ -4,7 +4,8 @@ COPY . /app
 
 RUN apk add make && \
     cd /app && \
-    make install
+    rm -rf backend.sqlite backend.egg-info && \
+    make install init-db
 
 WORKDIR /app
 CMD make run
